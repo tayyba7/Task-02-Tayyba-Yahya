@@ -1,179 +1,219 @@
-# Project 1 – Rule-Based AI Chatbot 🤖
+# Task-02-Tayyba-Yahya
 
-## 📌 About the Project
+## Iris Flower Classification using K-Nearest Neighbors
 
-This project is a simple **Rule-Based AI Chatbot** created using Python as part of the DecodeLabs Artificial Intelligence training program.
+This project demonstrates a basic **Machine Learning classification pipeline** using the built-in **Iris dataset** from `scikit-learn`.
 
-The chatbot interacts with the user through the command line and responds to different inputs using **predefined rules and responses**.
+The model uses **K-Nearest Neighbors (KNN)** to classify Iris flowers into three species based on their sepal and petal measurements.
 
-Instead of using machine learning, this chatbot uses Python programming concepts such as dictionaries, lists, conditional statements, loops, and user input to simulate a basic AI conversation.
+---
 
-## 🎯 Project Goal
+## 🌸 Project Overview
 
-The main goal of this project is to understand the basic concepts of Artificial Intelligence by creating a simple rule-based system.
+The Iris dataset contains measurements for three different Iris flower species:
 
-Through this project, the chatbot learns to recognize specific user inputs and provide an appropriate predefined response.
+- **Setosa**
+- **Versicolor**
+- **Virginica**
 
-The project helps demonstrate how **decision-making and control-flow logic** can be used to create an interactive AI application.
+Each flower is described using four features:
 
-## ✨ Features
+| Feature | Description |
+|---|---|
+| Sepal Length | Length of the sepal |
+| Sepal Width | Width of the sepal |
+| Petal Length | Length of the petal |
+| Petal Width | Width of the petal |
 
-* Responds to common greetings such as `hello`, `hi`, and `hey`
-* Provides predefined responses to different user inputs
-* Handles common replies such as `okay`, `ok`, and `thanks`
-* Provides clothing brand suggestions
-* Handles multiple user inputs during the conversation
-* Continues running until the user chooses to exit
-* Supports exit commands such as `bye`, `exit`, and `quit`
-* Provides simple and interactive chatbot responses
-
-## 🧠 How the Chatbot Works
-
-The chatbot works using a set of predefined rules.
-
-When the user enters a message:
-
-1. The chatbot receives the user's input.
-2. The input is processed and checked against predefined responses.
-3. The program uses conditional logic to determine the appropriate response.
-4. The chatbot displays the response.
-5. The conversation continues until the user enters an exit command.
-
-For example:
+The target values are represented numerically:
 
 ```text
-User: hello
-Bot: Hi! How can I help you?
-
-User: okay
-Bot: Alright!
-
-User: suggest some clothes brands
-Bot: Popular choices are Sapphire and Ethnic.
-
-User: bye
-Bot: Goodbye! Take care.
+0 → Setosa
+1 → Versicolor
+2 → Virginica
 ```
+
+---
 
 ## 🛠️ Technologies Used
 
-* **Python**
-* Dictionaries
-* Lists
-* `if-elif-else` statements
-* `while` loop
-* User input
-* String handling
-* Conditional logic
+- **Python**
+- **Scikit-learn**
+- **NumPy**
+- **K-Nearest Neighbors (KNN)**
+- **StandardScaler**
+- **Train/Test Split**
+- **Classification Metrics**
 
-## ▶️ How to Run
+---
 
-### 1. Install Python
+## 📂 Project Structure
 
-Make sure Python is installed on your computer.
+```text
+Task-02-Tayyba-Yahya/
+│
+├── iris_project.py
+└── README.md
+```
 
-You can check whether Python is installed by opening a terminal and running:
+---
+
+## 🔄 Machine Learning Pipeline
+
+The project follows the standard supervised machine learning workflow:
+
+```text
+🌸 Iris Dataset
+       ↓
+Load Dataset
+       ↓
+Separate Features (X) and Target (y)
+       ↓
+Train / Test Split
+       ↓
+Standardization
+       ├── Fit on Training Data
+       └── Transform Test Data
+       ↓
+KNN Classifier
+       ↓
+Train Model
+       ↓
+Make Predictions
+       ↓
+Evaluate Model
+       ├── Accuracy
+       ├── Confusion Matrix
+       └── Classification Report
+```
+
+### Why split before scaling?
+
+The scaler should learn the mean and standard deviation **only from the training data**. The same learned scaling parameters are then applied to the test data.
+
+This prevents information from the test set from leaking into the training process.
+
+---
+
+## 📦 Libraries
+
+The project imports the following tools:
+
+```python
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
+import numpy as np
+```
+
+---
+
+## 🚀 How to Run
+
+### 1. Clone the repository
 
 ```bash
-python --version
+git clone https://github.com/tayyba7/Task-02-Tayyba-Yahya.git
 ```
 
-### 2. Open the Project
-
-Open the project folder in **VS Code**.
-
-### 3. Open the Terminal
-
-In VS Code, open:
-
-**Terminal → New Terminal**
-
-### 4. Run the Chatbot
-
-Run the following command:
+### 2. Open the project
 
 ```bash
-python chatbot.py
+cd Task-02-Tayyba-Yahya
 ```
 
-### 5. Start Chatting
+### 3. Install dependencies
 
-Enter your messages when the chatbot asks for input.
-
-To stop the chatbot, type:
-
-```text
-bye
+```bash
+pip install scikit-learn numpy
 ```
 
-or:
+### 4. Run the program
 
-```text
-exit
+```bash
+python iris_project.py
 ```
 
-or:
+---
 
-```text
-quit
+## 🤖 KNN Model
+
+The project uses:
+
+```python
+KNeighborsClassifier(n_neighbors=5)
 ```
 
-## 💬 Example
+This means the classifier considers the **5 nearest training samples** when predicting the species of a new flower.
 
-```text
-Bot: Hello! Type 'bye' anytime to end our chat.
+---
 
-You: hello
-Bot: Hi! How can I help you?
+## 📊 Model Evaluation
 
-You: okay
-Bot: Alright!
+The model evaluates its predictions using three main metrics.
 
-You: suggest some clothes brands
-Bot: Popular choices are Sapphire and Ethnic.
+### Accuracy
 
-You: thank you
-Bot: You're welcome!
+Accuracy measures the overall percentage of correct predictions.
 
-You: bye
-Bot: Goodbye! Take care.
+```python
+accuracy_score(y_test, predictions)
 ```
 
-## 📚 What I Learned
+### Confusion Matrix
 
-Through this project, I learned how basic programming concepts can be used to create a simple AI-based application.
+The confusion matrix shows how many samples from each class were correctly or incorrectly classified.
 
-I practiced:
+```python
+confusion_matrix(y_test, predictions)
+```
 
-* Taking input from users
-* Processing user input
-* Using dictionaries and lists
-* Writing conditional statements
-* Using loops
-* Creating predefined responses
-* Building an interactive command-line application
-* Understanding the basic idea behind rule-based AI systems
+### Classification Report
 
-This project helped me understand that an AI system can make decisions based on predefined rules and conditions.
+The classification report provides:
 
-## 🚀 Future Improvements
+- Precision
+- Recall
+- F1-score
+- Support
 
-In the future, I would like to improve the chatbot by:
+```python
+classification_report(
+    y_test,
+    predictions,
+    target_names=iris.target_names
+)
+```
 
-* Adding more conversation topics
-* Adding more possible user inputs
-* Providing more varied responses
-* Making the chatbot understand different forms of the same question
-* Giving the chatbot a unique personality
-* Adding a graphical user interface (GUI)
-* Adding natural language processing (NLP)
-* Connecting the chatbot with a more advanced AI model
+---
 
-## 🎓 Project Information
+## 🎯 Learning Objectives
 
-**Project:** Project 1 – Rule-Based AI Chatbot
-**Track:** Artificial Intelligence
-**Batch:** 2026
-**Organization:** DecodeLabs
-**Programming Language:** Python
-**Project Type:** Rule-Based AI Chatbot
+This task demonstrates the basic concepts of:
+
+- Loading a dataset using Scikit-learn
+- Understanding features and targets
+- Splitting data into training and testing sets
+- Standardizing numerical features
+- Training a KNN classifier
+- Making predictions
+- Evaluating a classification model
+- Understanding a complete machine learning pipeline
+
+---
+
+## 👩‍💻 Author
+
+**Tayyba Yahya**
+
+GitHub: [@tayyba7](https://github.com/tayyba7)
+
+Repository: [Task-02-Tayyba-Yahya](https://github.com/tayyba7/Task-02-Tayyba-Yahya)
+
+---
+
+## 📄 License
+
+This project is created for educational and learning purposes.
